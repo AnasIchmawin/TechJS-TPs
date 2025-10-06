@@ -94,7 +94,6 @@ function playGame(playerMove) {
   
   divImg.innerHTML += `<b>Computer: <b> <img src='images/${computerMove}-emoji.png' class='move-icon'>`
 
-
 }
 
 function updateScoreElement() {
@@ -116,4 +115,20 @@ function pickComputerMove() {
   }
 
   return computerMove;
+}
+
+var autoPlayActive = false;
+var timeOutValue = 0
+
+function setAutoPlayActive() {
+  autoPlayActive = !autoPlayActive
+
+  if (!autoPlayActive) clearTimeout(timeOutValue)
+    else autoPlay()
+}
+
+function autoPlay() {
+  const playerMove = pickComputerMove();
+  playGame(playerMove)
+  timeOutValue = setTimeout(autoPlay,2000)
 }
